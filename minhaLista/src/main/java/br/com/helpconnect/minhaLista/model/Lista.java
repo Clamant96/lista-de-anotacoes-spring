@@ -4,9 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "lista")
@@ -16,14 +21,14 @@ public class Lista {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotNull
-	private String nome;
-	
-	@NotNull
-	private String senha;
-	
 	@Size(max = 15000)
 	private String texto;
+	
+	@OneToOne
+    @MapsId
+    @JoinColumn(name = "usuario_id")
+	@JsonIgnoreProperties("lista")
+	private Usuario usuario;
 
 	public long getId() {
 		return id;
@@ -41,20 +46,12 @@ public class Lista {
 		this.texto = texto;
 	}
 
-	public String getNome() {
-		return nome;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
