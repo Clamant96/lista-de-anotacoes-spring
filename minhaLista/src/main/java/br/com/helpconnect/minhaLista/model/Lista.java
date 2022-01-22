@@ -24,6 +24,8 @@ public class Lista {
 	@ManyToOne
 	@JsonIgnoreProperties("lista")
 	private Categoria categoria;
+	
+	private boolean ativo;
 
 	public long getId() {
 		return id;
@@ -47,6 +49,14 @@ public class Lista {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }
