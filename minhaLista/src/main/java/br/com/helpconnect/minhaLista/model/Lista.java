@@ -4,11 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -24,11 +21,9 @@ public class Lista {
 	@Size(max = 15000)
 	private String texto;
 	
-	@OneToOne
-    @MapsId
-    @JoinColumn(name = "usuario_id")
+	@ManyToOne
 	@JsonIgnoreProperties("lista")
-	private Usuario usuario;
+	private Categoria categoria;
 
 	public long getId() {
 		return id;
@@ -46,12 +41,12 @@ public class Lista {
 		this.texto = texto;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }

@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.helpconnect.minhaLista.model.Lista;
 import br.com.helpconnect.minhaLista.model.Usuario;
 import br.com.helpconnect.minhaLista.model.UsuarioLogin;
-import br.com.helpconnect.minhaLista.repository.ListaRespository;
 import br.com.helpconnect.minhaLista.repository.UsuarioRepository;
 
 @Service
@@ -19,9 +17,6 @@ public class UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
-	@Autowired
-	private ListaRespository listaRepository;
 	
 	/* CADASTRAR USUARIO NO SISTEMA */
 	public Optional<Usuario> CadastrarCliente(Usuario usuario) {	
@@ -36,17 +31,8 @@ public class UsuarioService {
 		String senhaEncoder = encoder.encode(usuario.getSenha());
 		usuario.setSenha(senhaEncoder);
 		
-		/*GERANDO CARRINHO USUARIO*/
-		Lista lista = new Lista();
-		
 		/* REGISTRA O USUARIO NA BASE DE DADOS */
 		usuarioRepository.save(usuario);
-		
-		/* ASSOCIA O USUARIO AO CARRINHO */
-		lista.setUsuario(usuario);
-		
-		/* REGISTRA O CARRINHO NA BASE DE DADOS */
-		listaRepository.save(lista);
 
 		return Optional.of(usuarioRepository.save(usuario));
 
@@ -76,7 +62,7 @@ public class UsuarioService {
 				usuarioLogin.get().setToken(authHeader);				
 				usuarioLogin.get().setUsername(usuario.get().getUsername());
 				usuarioLogin.get().setSenha(usuario.get().getSenha());
-				usuarioLogin.get().setLista(usuario.get().getLista());
+				usuarioLogin.get().setCategoria(usuario.get().getCategoria());
 				usuarioLogin.get().setId(usuario.get().getId());
 				
 				return usuarioLogin;

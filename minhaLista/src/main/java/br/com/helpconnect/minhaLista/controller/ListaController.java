@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.helpconnect.minhaLista.model.Lista;
 import br.com.helpconnect.minhaLista.repository.ListaRespository;
-import br.com.helpconnect.minhaLista.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping("/lista")
@@ -26,9 +25,6 @@ public class ListaController {
 	
 	@Autowired
 	private ListaRespository reposiRespository;
-	
-	@Autowired
-	private UsuarioRepository usuarioRepository;
 	
 	@GetMapping
 	public ResponseEntity<List<Lista>> findAllByLista() {
@@ -59,7 +55,6 @@ public class ListaController {
 	@DeleteMapping("/{id}")
 	public void deleteLista(@PathVariable long id) {
 		reposiRespository.deleteById(id);
-		usuarioRepository.deleteById(id);
 	}
 
 }

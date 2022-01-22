@@ -7,5 +7,5 @@ import br.com.helpconnect.minhaLista.model.Lista;
 
 @Repository
 public interface ListaRespository extends JpaRepository<Lista, Long> {
-
+	
 }

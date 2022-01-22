@@ -1,5 +1,6 @@
 package br.com.helpconnect.minhaLista.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,12 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@GetMapping
+	public ResponseEntity<List<Usuario>> findAllByUsuarios() {
+		
+		return ResponseEntity.ok(usuarioRepository.findAll());
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Usuario> findByIdUsuario(@PathVariable long id) {

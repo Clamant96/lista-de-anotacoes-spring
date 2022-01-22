@@ -1,5 +1,7 @@
 package br.com.helpconnect.minhaLista.model;
 
+import java.util.List;
+
 public class UsuarioLogin {
 	
 	private long id;
@@ -8,7 +10,7 @@ public class UsuarioLogin {
 	
 	private String senha;
 	
-	private Lista lista;
+	private List<Categoria> categoria;
 	
 	private String token;
 	
@@ -35,13 +37,13 @@ public class UsuarioLogin {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	public Lista getLista() {
-		return lista;
+
+	public List<Categoria> getCategoria() {
+		return categoria;
 	}
-	
-	public void setLista(Lista lista) {
-		this.lista = lista;
+
+	public void setCategoria(List<Categoria> categoria) {
+		this.categoria = categoria;
 	}
 
 	public String getToken() {

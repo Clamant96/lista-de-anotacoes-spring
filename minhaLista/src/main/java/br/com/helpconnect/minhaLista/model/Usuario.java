@@ -1,12 +1,13 @@
 package br.com.helpconnect.minhaLista.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -26,10 +27,9 @@ public class Usuario {
 	@NotNull
 	private String senha;
 	
-	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    @JsonIgnoreProperties("usuario")
-	private Lista lista;
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuario")
+	private List<Categoria> categoria;
 
 	public long getId() {
 		return id;
@@ -55,12 +55,12 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public Lista getLista() {
-		return lista;
+	public List<Categoria> getCategoria() {
+		return categoria;
 	}
 
-	public void setLista(Lista lista) {
-		this.lista = lista;
+	public void setCategoria(List<Categoria> categoria) {
+		this.categoria = categoria;
 	}
 	
 }
